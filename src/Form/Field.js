@@ -4,12 +4,10 @@ export default class Field extends Component {
   constructor(props, context) {
     super(props, context)
 
-    const {name, type, value, checked} = props
-    this.is_checkbox = type === 'checkbox'
-    this.is_radio = type === 'radio'
-
+    this.value_field = props.type === 'checkbox' ? 'checked' : 'value'
     this.data = {}
-    this.data[name] = this.is_checkbox ? checked : value
+    this.data[props.name] = props[this.value_field]
+    
     this.state = this.data
 
     this.handleChange = this.handleChange.bind(this)
@@ -25,9 +23,9 @@ export default class Field extends Component {
   }
 
   init() {
-    const {name, value, checked, defaultChecked} = this.props
+    const {type, name, value, checked, defaultChecked} = this.props
     let handleChange = null
-    if (this.is_checkbox) {
+    if (type === 'checkbox') {
       handleChange = () => {
         this.context.data[name] = this.data[name] = !this.data[name]
         this.setState(this.data)
@@ -39,7 +37,7 @@ export default class Field extends Component {
         this.setState(this.data)
       }
       this.context.data[name] = (
-        this.is_radio && !defaultChecked ? 
+        type === 'radio' && !defaultChecked ? 
         this.context.data[name] : value
       )    
     }
@@ -52,17 +50,13 @@ export default class Field extends Component {
   }
 
   handleChange(e) {
-    let value = this.is_checkbox ? e.target.checked : e.target.value
-    this.context.event.emit(this.emit_name, value, e)
+    this.context.event.emit(this.emit_name, e.target[this.value_field], e)
   }
 
   render() {
     const {component: TempComponent, ...rest} = this.props
-    if (this.is_checkbox) {
-      rest.checked = this.state[this.props.name]
-    } else {
-      rest.value = this.state[this.props.name]
-    }
+    rest[this.value_field] = this.state[this.props.name]
+    
     return (
       <TempComponent 
         {...rest}

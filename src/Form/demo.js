@@ -8,7 +8,7 @@ const Demo = () => (
       console.log(context.data)
     }}
     onEmit={(name, payload, e) => {
-      console.log(name, payload, e.target.value)
+      console.log(name, payload, e)
     }}
   >
     <Field 

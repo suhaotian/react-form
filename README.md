@@ -17,8 +17,8 @@ const Demo = () => (
     onSubmit={(e, fields) => {
       console.log(fields)
     }}
-    onEmit={(name, payload) => {  // handle every emit event with payload
-      console.log(name, payload.target.value)
+    onEmit={(name, value, e) => {  // handle every emit event with payload
+      console.log(name, value, e)
     }}
   >
     <Field 
