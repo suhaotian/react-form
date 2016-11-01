@@ -34,8 +34,8 @@ export default class Field extends Component {
       }
       this.context.data[name] = checked 
     } else {
-      handleChange = (e) => {
-        this.context.data[name] = this.data[name] = e.target.value
+      handleChange = (value, e) => {
+        this.context.data[name] = this.data[name] = value
         this.setState(this.data)
       }
       this.context.data[name] = (
@@ -52,7 +52,8 @@ export default class Field extends Component {
   }
 
   handleChange(e) {
-    this.context.event.emit(this.emit_name, e)
+    let value = this.is_checkbox ? e.target.checked : e.target.value
+    this.context.event.emit(this.emit_name, value, e)
   }
 
   render() {

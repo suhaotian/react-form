@@ -3,7 +3,7 @@ import generateContext from './generateContext'
 
 export default class Form extends Component {
   getChildContext() {
-    this.context = generateContext()
+    this.context = generateContext(this.props.onEmit)
     return this.context
   }
 
@@ -11,7 +11,7 @@ export default class Form extends Component {
     return (
       <form onSubmit={(e) => {
         e.preventDefault()
-        this.props.onSubmit(e, this.context.data)
+        this.props.onSubmit(e, this.context)
       }}>
         {this.props.children}
       </form>

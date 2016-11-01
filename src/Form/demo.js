@@ -3,9 +3,14 @@ import Form from './Form'
 import Field from './Field'
 
 const Demo = () => (
-  <Form onSubmit={(e, fields) => {
-    console.log(fields)
-  }}>
+  <Form 
+    onSubmit={(e, context) => {
+      console.log(context.data)
+    }}
+    onEmit={(name, payload, e) => {
+      console.log(name, payload, e.target.value)
+    }}
+  >
     <Field 
       placeholder="type something" 
       component="input" 
