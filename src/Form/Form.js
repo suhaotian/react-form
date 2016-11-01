@@ -27,8 +27,3 @@ Form.childContextTypes = {
   event: PropTypes.object,
   data: PropTypes.object
 }
-
-Form.contextTypes = {
-  event: PropTypes.object,
-  data: PropTypes.object
-}

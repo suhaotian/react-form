@@ -13,9 +13,18 @@ export default class Field extends Component {
     this.state = this.data
 
     this.handleChange = this.handleChange.bind(this)
+    this.init = this.init.bind(this)
   }
 
   componentDidMount() {
+    this.init()
+  }
+
+  componentWillUnmount() {
+    this.context.event.off(this.emit_name)
+  }
+
+  init() {
     const {name, value, checked, defaultChecked} = this.props
     let handleChange = null
     if (this.is_checkbox) {
@@ -40,10 +49,6 @@ export default class Field extends Component {
       name
     )
     this.context.event.on(this.emit_name, handleChange)
-  }
-
-  componentWillUnmount() {
-    this.context.event.off(this.emit_name)
   }
 
   handleChange(e) {
