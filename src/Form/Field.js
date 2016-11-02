@@ -20,6 +20,7 @@ export default class Field extends Component {
 
   componentWillUnmount() {
     this.context.event.off(this.emit_name)
+    delete this.context.data[this.props.name]
   }
 
   init() {
