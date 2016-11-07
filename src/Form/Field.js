@@ -51,7 +51,7 @@ export default class Field extends Component {
   }
 
   handleChange(e) {
-    this.context.event.emit(this.emit_name, e.target[this.value_field], e)
+    this.context.event.emit(this.emit_name, e.target ? e.target[this.value_field] : e, e)
   }
 
   render() {
